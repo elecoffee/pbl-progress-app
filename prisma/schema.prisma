@@ -1,0 +1,21 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// クラス図「Project」に対応
+model Project {
+  id            String   @id @default(uuid()) // UUID形式
+  title         String
+  description   String?                       // 任意の文字
+  deadline      DateTime                      // 最終〆切
+  isTeamProject Boolean  @default(false)      // チーム/個人区分
+  status        String   @default("進行中")   // 初期ステータスは進行中
+  createdAt     DateTime @default(now())
+}
